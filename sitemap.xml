@@ -1,8 +1,14 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
+        <loc>
+            http://fugiman.github.io/blog/2013/08/10/they-say-the-first-step-is-the-hardest-dot-dot-dot/
+        </loc>
+        <lastmod>2013-08-10T02:13:10+00:00</lastmod>
+    </url>
+    <url>
         <loc>http://fugiman.github.io/</loc>
-        <lastmod>2013-08-10T00:08:24+00:00</lastmod>
+        <lastmod>2013-08-10T02:13:10+00:00</lastmod>
     </url>
     <url>
         <loc>http://fugiman.github.io/robots.txt</loc>
@@ -10,10 +16,10 @@
     </url>
     <url>
         <loc>http://fugiman.github.io/resume/</loc>
-        <lastmod>2013-08-10T00:28:35+00:00</lastmod>
+        <lastmod>2013-08-10T01:40:12+00:00</lastmod>
     </url>
     <url>
         <loc>http://fugiman.github.io/blog/archives/</loc>
-        <lastmod>2013-08-10T00:08:24+00:00</lastmod>
+        <lastmod>2013-08-10T02:13:10+00:00</lastmod>
     </url>
 </urlset>

@@ -4,7 +4,7 @@
   <title><![CDATA[Fugi's Blog]]></title>
   <link href="http://fugiman.github.io/atom.xml" rel="self"/>
   <link href="http://fugiman.github.io/"/>
-  <updated>2013-08-10T00:30:41+00:00</updated>
+  <updated>2013-08-10T02:16:47+00:00</updated>
   <id>http://fugiman.github.io/</id>
   <author>
     <name><![CDATA[Chris "Fugiman" Gamble]]></name>
@@ -12,5 +12,39 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[They say the first step is the hardest...]]></title>
+    <link href="http://fugiman.github.io/blog/2013/08/10/they-say-the-first-step-is-the-hardest-dot-dot-dot/"/>
+    <updated>2013-08-10T01:49:00+00:00</updated>
+    <id>http://fugiman.github.io/blog/2013/08/10/they-say-the-first-step-is-the-hardest-dot-dot-dot</id>
+    <content type="html"><![CDATA[<p>I&rsquo;ve been a web developer for many years now, and during that time I&rsquo;ve never really had a site of my own.
+It always struck me as odd that for someone whose daily routine consisted of making websites, I couldn&rsquo;t even make one for myself.
+The sites I made were for a purpose &ndash; they provided a service or a piece of information &ndash; and I couldn&rsquo;t figure out what the purpose of a personal site would be.
+Last year I made a single page site as a portfolio, and I was immediately disgusted with it.
+I&rsquo;m a developer, not a designer.
+The representation of myself as an artist instead of a problem solver just didn&rsquo;t feel right.
+So I deleted it and returned to having nothing to say &ldquo;This is me&rdquo;.</p>
+
+<p>Over the past year I&rsquo;ve more firmly integrated myself into the open source world.
+I started heavily using github, and began to collaborate with others.
+As a part of this process, I found many interesting programmers who were much smarter than me.
+They all had one thing in common, they had a blog.
+A few days ago, I found a blog post saying that &ldquo;comments are a facade fooling people into thinking they have a voice. They don&rsquo;t. You only have a voice if you have a blog.&rdquo;
+While perhaps a bit extreme of a claim, it made me realize that comments are much like posting anonymously: It&rsquo;s very unlikely that people will use it to build an image of you.
+Your comments are spread over many websites, sometimes with different usernames.
+It&rsquo;s hard for people to build them into a complete picture of you, unless they are the NSA.
+A blog, on the other hand, is a monolithic compendium of who you are.
+If somebody reads your blog, they can build an image of the kind of person you are.
+Perhaps a flawed and incomplete image, but an image nonetheless.</p>
+
+<p>And there I had my answer.
+A portfolio is silly, I can just link you to what I&rsquo;ve made.
+After all, they are websites.
+A blog is the way for me to actually share the struggles I have, what I learn from them, and hopefully I can teach you something as well.
+And just maybe, it&rsquo;ll lead to me being a better programmer.
+I look forward to seeing what comes of it.</p>
+]]></content>
+  </entry>
   
 </feed>
