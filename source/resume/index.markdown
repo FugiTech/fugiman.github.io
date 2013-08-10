@@ -1,10 +1,11 @@
 ---
 layout: page
-title: "resume"
+title: 
 date: 2013-08-10 00:28
-comments: true
-sharing: true
+comments: false
+sharing: false
 footer: true
+sidebar: false
 ---
 Christopher Gamble
 ==================
