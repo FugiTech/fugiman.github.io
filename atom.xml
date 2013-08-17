@@ -4,7 +4,7 @@
   <title><![CDATA[Fugi's Blog]]></title>
   <link href="http://fugiman.github.io/atom.xml" rel="self"/>
   <link href="http://fugiman.github.io/"/>
-  <updated>2013-08-10T02:16:47+00:00</updated>
+  <updated>2013-08-17T05:44:20+00:00</updated>
   <id>http://fugiman.github.io/</id>
   <author>
     <name><![CDATA[Chris "Fugiman" Gamble]]></name>
@@ -12,6 +12,105 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[On click-fueled javascript games]]></title>
+    <link href="http://fugiman.github.io/blog/2013/08/17/on-click-fueled-javascript-games/"/>
+    <updated>2013-08-17T04:35:00+00:00</updated>
+    <id>http://fugiman.github.io/blog/2013/08/17/on-click-fueled-javascript-games</id>
+    <content type="html"><![CDATA[<p><em>alternatively: ClickQuest and Cookie Clicker, A tale of two games that start with a single click</em></p>
+
+<p>Before I start, I recommend you at least glance at the games for a minute or two.<br/>
+<a href="http://www.clickquest.net/">http://www.clickquest.net/</a><br/>
+<a href="http://orteil.dashnet.org/experiments/cookie/">http://orteil.dashnet.org/experiments/cookie/</a></p>
+
+<p>I made ClickQuest almost exactly 3 years ago, far past the time required for me to regret every line of code I wrote.
+However, I did learn quite a few things in its bug-riddled construction, and many things in the years of reflection afterwards.
+ClickQuest was originally marketed as &ldquo;distilling an MMORPG into its most core mechanic &ndash; click and numbers go up&rdquo;.
+Indeed, Cookie Clicker takes this a step further: Click to increase a number that you can decrease to increase faster.
+It is the most instant of gratification, a split second is all it takes.</p>
+
+<p>However, while this makes the games extremely good for single-player, it makes it incredibly hard for multiplayer.
+If you play by yourself, there is no reason to cheat, as all you do is lower your own enjoyment.
+When multiplayer (more specifically a leaderboard) is introduced, then players are motivated to cheat.
+In MMORPGs the layers of abstraction provide a mechanism to defeat cheating.
+But in clicking games, we&rsquo;ve peeled away those layers, and so our only action in the game is clicking.
+This is the biggest strength and greatest weakness in clicking games.</p>
+
+<p>When I made ClickQuest, it was designed with a leaderboard and chat in mind.
+I knew that cheating would be a big concern, so I tried to proactively thwart it.
+Here&rsquo;s what I tried in order of when I tried it.</p>
+
+<h3>Approach 1: Send every click to the server</h3>
+
+<p>This worked great in testing.
+If I saw every click then nobody could fake it, right?
+In reality, this just changed cheating from faking clicks to spamming my server with HTTP requests.
+And when your game generates a request for every click, you&rsquo;ve just invented a way to DDOS your own server.
+Oops.</p>
+
+<h3>Approach 2: Rate limit clicks client-side</h3>
+
+<p>I changed the client to only accept a click when 60ms had passed since the last click.
+I found this was a reasonable upper bound for how fast a human can click a mouse, even with a mouse in each hand alternating clicks.
+(Yes, I had some hardcore players.)
+But this just slows down the cheater, assuming they don&rsquo;t go past it straight to the server.</p>
+
+<h3>Approach 3: Obfusicate the request payload</h3>
+
+<p>Aha, if players can bypass the client to cheat, I need to force them to use the client.
+Simple! Make the packet sent from the client to the server super special secret so that they can&rsquo;t duplicate it!
+And of course, obfusicate my javascript so they can&rsquo;t find out how I do it!
+A great idea in theory, but it is <a href="http://jsbeautifier.org/">pretty trivial to unpack javascript</a>.
+In reality, this did nothing.</p>
+
+<h3>Approach 4: Track as many metrics as I can and figure out where they should be server-side</h3>
+
+<p>Finally, a proper solution.
+I kept track of how many clicks per second a user made whenever they made a request to the server.
+I&rsquo;d then compare that to how many clicks per second they&rsquo;d made in the past 100 requests.
+If your clicking was consistently close to the 60ms per click mark, I&rsquo;d give them a strike.
+Likewise if they clicked faster than 60ms mark, or if they were clicking at the same rate constantly.
+This actually led to catching bots, but unfortunately it had too many false positives and had to be turned off.</p>
+
+<h3>Approach 5: Give up and let it happen</h3>
+
+<p>By this point I&rsquo;d spent 6 months and had no idea what else I could do.
+It is extremely difficult to regulate pure clicks.
+If I were to attempt it today, I&rsquo;d use the efficiency of websockets to combine approach 1 and 4.
+I&rsquo;d log the location and time of every click for every user, and use that to try and weed out (poorly designed) bots.
+But even that would likely fail.
+The developer simply lacks enough information to properly prevent cheating.</p>
+
+<h3>But Cookie Clicker is different than ClickQuest!</h3>
+
+<p>Orteil has added back a layer of abstraction in the form of buyable cookie producers.
+Now, past a certain point, it&rsquo;s the buildings producing 99% of the cookies &ndash; clicking is irrelevant.
+Using my numbers a player can legitimately acquire 20 cookies per second from clicking.
+If you open a websocket connection for each player, you can track whether they have the page open or not.
+Then, send a packet every 30 seconds, or on building purchase (whichever happens first).
+Each packet would have the number of cookies and each type of building.
+You can verify the buildings with stored data, and the cookies with simple arithmetic.
+Boom, cheating solved!</p>
+
+<p>But not quite.
+You&rsquo;ve just slowed botting down to human levels.
+Like an MMORPG, it&rsquo;s possible to bot as long as you play by the rules.
+From here, you&rsquo;d have to use browser fingerprinting, or other esoteric metrics to weed out bots.
+Just remember, the stricter your anti-cheat protection is, the likely you are to anger your legitimate players!</p>
+
+<h3>A few parting thoughts</h3>
+
+<p>I love javascript clicking games.
+They seem extremly simple, but can hide great ingenuity.
+(Also, they ease my pain of not knowing flash).
+But I feel you need to know what you&rsquo;re getting into when making one.
+Unlike flash, or a desktop app, it&rsquo;s easy for the most basic of programmer to read your entire source code.
+A little mucking around in dev tools and they can pry your game apart.
+I find this a great thing, as it allows others to learn from what they find, but it can lead to the problems I mentioned above.
+Again, just know the limitations of your platform.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[They say the first step is the hardest...]]></title>
