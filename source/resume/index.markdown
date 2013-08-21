@@ -15,6 +15,22 @@ Christopher Gamble
 Cary, NC 27519  
 +1 919 741 8653
 
+Work Experience
+---------------
+
+__Software Developer at Stoneware (May 2012 to August 2012)__
+
+* Aided in selecting a new Java framework for future products
+* Prototyped new product ideas in the selected framework to demonstrate feasibility and ease of use
+
+__Software Developer at IBM (May 2011 to August 2011)__
+
+* Upgraded internal services to meet compatibility criteria and better serve visually impaired employees
+
+__Software Developer at IBM (May 2010 to August 2010)__
+
+* Repaired and extended unit testing for several internal services
+
 Volunteer Work
 --------------
 
@@ -30,22 +46,6 @@ __Software Developer and System Administrator at Desert Bus For Hope (May 2011 t
 * Created a custom web chat client to connect directly to the chat server without a proxy, while also offering event specific information
 * Made a user system to help track donations and prizes per person
 * Added an admin control panel, cutting administrative man-hours in half
-
-Work Experience
----------------
-
-__Software Developer at Stoneware (Summer of 2012)__
-
-* Aided in selecting a new Java framework for future products
-* Prototyped new product ideas in the selected framework to demonstrate feasibility and ease of use
-
-__Software Developer at IBM (Summer of 2011)__
-
-* Upgraded internal services to meet compatibility criteria and better serve visually impaired employees
-
-__Software Developer at IBM (Summer of 2010)__
-
-* Repaired and extended unit testing for several internal services
 
 Personal Projects
 -----------------
@@ -70,12 +70,12 @@ This allowed the game to fail less when the asset server is under high load, as 
 Skills
 ------
 
-__Web Development:__ HTML5, CSS3, jQuery, websockets, history API, Web RTC, ...  
+__Web Development:__ HTML5, CSS3, jQuery, Websockets, History API, Web RTC, Canvas  
 __Scripting Languages:__ Python, PHP, Ruby, [BF](http://en.wikipedia.org/wiki/Brainfuck)  
-__Databases:__ MySQL, PostgreSQL, MongoDB, DynamoDB, ...  
+__Databases:__ MySQL, PostgreSQL, MongoDB, DynamoDB, DB2  
 __Compiled Languages:__ Java, C#, C++, Assembly  
-__Frameworks:__ CodeIgniter, Django, Flask, ...  
-__API Integration:__ Facebook, Twitter, Wordpress, Mailgun, Twilio, ...
+__Frameworks:__ CodeIgniter, Django, Flask, Jekyll  
+__API Integration:__ Facebook, Twitter, Tumblr, Google, Yahoo, Microsoft, LinkedIn, Wordpress, PubNub, Mailgun, Twilio
 
 Education
 ---------
