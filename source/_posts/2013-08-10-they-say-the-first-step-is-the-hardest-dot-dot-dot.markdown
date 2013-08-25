@@ -3,7 +3,7 @@ layout: post
 title: "They say the first step is the hardest..."
 date: 2013-08-10 01:49
 comments: true
-categories: 
+categories: life
 ---
 I've been a web developer for many years now, and during that time I've never really had a site of my own.
 It always struck me as odd that for someone whose daily routine consisted of making websites, I couldn't even make one for myself.

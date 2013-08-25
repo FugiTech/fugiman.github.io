@@ -3,7 +3,7 @@ layout: post
 title: "On click-fueled javascript games"
 date: 2013-08-17 04:35
 comments: true
-categories: 
+categories: games
 ---
 *alternatively: ClickQuest and Cookie Clicker, A tale of two games that start with a single click*
 
