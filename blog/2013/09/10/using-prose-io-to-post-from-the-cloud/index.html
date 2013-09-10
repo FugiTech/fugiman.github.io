@@ -1,0 +1,202 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Using Prose.IO to post from the cloud - Fugiman</title>
+	<meta name="author" content="Chris "Fugiman" Gamble">
+
+	
+	<meta name="description" content="When I first chose Octopress, I was delighted that I could quickly and easily create posts in markdown. I wanted to ensure that it would be as easy &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Fugiman" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+</head>
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">Fugiman</a></h1>
+<nav id="main-nav"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+	<li><a href="/resume">Resume</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+	<li><a href="/resume">Resume</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:fugiman.github.io">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		<a class="twitter" href="http://twitter.com/Fugiman" title="Twitter">Twitter</a>
+		
+		
+		<a class="github" href="https://github.com/Fugiman" title="GitHub">GitHub</a>
+		
+    
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+    
+	</div>
+	<form class="search" action="http://google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:fugiman.github.io">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">Using Prose.IO to Post From the Cloud</h2>
+	<div class="entry-content"><p>When I first chose Octopress, I was delighted that I could quickly and easily create posts in markdown. I wanted to ensure that it would be as easy as possible to create content, so that I&rsquo;d have no reason not to post whatever I felt like. However, the biggest issue I had was that it required running jekyll locally to do so.</p>
+
+<p>Today I decided to fix this stumbling block, and began to look for a frontend for Octopress. What I found instead was <a href="http://prose.io/">Prose.IO</a>. Prose isn&rsquo;t a frontend for Octopress, it is a way to edit any file in any of your github repositories easily. It just so happens that this is all it takes to allow me to create posts straight from my browser without any fussing with jekyll or git. I create a post on Prose.IO, which then commits to github, which is then processed by <a href="https://travis-ci.org/">Travis.CI</a>, which then commits back to github, which deploys the site. It all just works.</p>
+
+<p>If this sounds like something you&rsquo;d want for yourself, you can checkout <a href="http://rogerz.github.io/blog/2013/02/21/prose-io-github-travis-ci/">this handy guide by Rogerz Zhang</a>. It got me squared away in about 20 minutes. Just note that the format of the Prose.IO configuration in <code>_config.yml</code> has changed. My settings look like the following:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#prose.io settings 
+</span><span class='line'>prose: 
+</span><span class='line'>  rooturl: "source" 
+</span><span class='line'>  metadata: 
+</span><span class='line'>    source/_posts:
+</span><span class='line'>      - name: "layout"
+</span><span class='line'>        field:
+</span><span class='line'>          element: "hidden"
+</span><span class='line'>          value: "post"
+</span><span class='line'>      - name: "title"
+</span><span class='line'>        field:
+</span><span class='line'>          element: "text"
+</span><span class='line'>          label: "Title"
+</span><span class='line'>          value: "Post"
+</span><span class='line'>      - name: "categories"
+</span><span class='line'>        field:
+</span><span class='line'>          element: "text"
+</span><span class='line'>          label: "Categories"
+</span><span class='line'>          value: ""</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-10T12:35:00+00:00" pubdate data-updated="true">Sep 10<span>th</span>, 2013</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/blogging/'>blogging</a>
+
+
+</div>
+	
+</div>
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+		
+		
+		<a class="addthis_button_tweet"></a>
+		
+		
+		
+	</div>
+	
+</div>
+
+
+</div>
+	<footer id="footer" class="inner">Copyright &copy; 2013
+
+    Chris "Fugiman" Gamble
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-43089007-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+</body>
+</html>
