@@ -14,5 +14,5 @@ after_script:
 - rake deploy
 env:
   global:
-  - GH_REPO="rogerz/rogerz.github.com"
+  - GH_REPO="Fugiman/fugiman.github.com"
   - secure: "ikR2LbZ8byiqSRK4QjJiEG9JusdcIX3VpaD0BrJJCGyz0ZO8gYUJv3vruBE/yMVbBl30qhO7Q0a/FPZWLmgl3cM0hDgu3nBmvujOGit/FNUcgCX/byH1LACbIF5tAydD2X/q/Ajwy5tXrfhjfB4f1S/cnSTEI0626PwRMSBAf7o="
