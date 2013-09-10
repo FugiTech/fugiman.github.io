@@ -2,6 +2,8 @@
 layout: post
 published: true
 title: Using Prose.IO to post from the cloud
+date: "2013-09-10 12:35"
+categories: blogging
 ---
 
 When I first chose Octopress, I was delighted that I could quickly and easily create posts in markdown. I wanted to ensure that it would be as easy as possible to create content, so that I'd have no reason not to post whatever I felt like. However, the biggest issue I had was that it required running jekyll locally to do so.
