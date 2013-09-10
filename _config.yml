@@ -108,6 +108,10 @@ prose:
         field:
           element: "hidden"
           value: "post"
+      - name: "published"
+        field:
+          element: "hidden"
+          value: true
       - name: "title"
         field:
           element: "text"
@@ -118,3 +122,7 @@ prose:
           element: "text"
           label: "Categories"
           value: ""
+      - name: "date"
+        field:
+          element: "text"
+          value: "CURRENT_DATETIME"
