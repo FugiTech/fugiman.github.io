@@ -98,3 +98,14 @@ google_analytics_tracking_id: UA-43089007-1
 
 # Facebook Like
 facebook_like: false
+
+#prose.io settings 
+prose: 
+  rooturl: "source" 
+  metadata: 
+    "source/_posts": | 
+      layout: post 
+      title: "Post" 
+      comments: false 
+      categories:  
+      published: true 
