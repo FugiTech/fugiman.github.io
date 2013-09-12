@@ -2,12 +2,13 @@ var markdownpdf = require("markdown-pdf"),
     fs = require("fs"),
     opts = {
         renderDelay: 3000,
+        paperFormat: "Letter",
         cssPath: "pdf.css",
         preProcessMd: function(md) {
             return md.replace(/---\n[\s\S]*?\n---\n/, '').replace('[__Download as PDF__](http://fugiman.com/resume/ChrisGamble.pdf)', '');
         },
         preProcessHtml: function(html) {
-            return html.replace(/<a href="([^"]*)">(.*?)<\/a>/g, '<a>$2</a>');
+            return html.replace(/<a href="([^"]*)">(.*?)<\/a>/g, '$2');
         }
     };
 

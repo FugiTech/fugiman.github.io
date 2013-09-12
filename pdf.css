@@ -18,7 +18,7 @@ html, body {
 	font-style: normal;
 }
 h1, h2, ul, p {
-	margin: 6px 0;
+	margin: 4px 0 0 0;
 }
 h1, h2, b, strong {
 	font-family: 'OxygenBold', sans-serif; 
