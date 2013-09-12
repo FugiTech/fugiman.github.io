@@ -1,0 +1,164 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Automatic Resume PDF Generation - Fugiman</title>
+	<meta name="author" content="Chris "Fugiman" Gamble">
+
+	
+	<meta name="description" content="Earlier I posted about using Prose.IO and Travis-CI to allow posting on my blog from anywhere with little hassle. However, I also host my resume on &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Fugiman" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+</head>
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">Fugiman</a></h1>
+<nav id="main-nav"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+	<li><a href="/resume">Resume</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+	<li><a href="/resume">Resume</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:fugiman.github.io">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		<a class="twitter" href="http://twitter.com/Fugiman" title="Twitter">Twitter</a>
+		
+		
+		<a class="github" href="https://github.com/Fugiman" title="GitHub">GitHub</a>
+		
+    
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+    
+	</div>
+	<form class="search" action="http://google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:fugiman.github.io">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">Automatic Resume PDF Generation</h2>
+	<div class="entry-content"><p>Earlier I posted about using Prose.IO and Travis-CI to allow posting on my blog from anywhere with little hassle. However, I also host my resume on this site and wanted to be able to easily update it as well. While I could edit it like any other post from Prose, I also wanted a PDF copy for companies seeking a downloadable version and for uploading to other sites.</p>
+
+<p>The question became &ldquo;How do I automatically convert my markdown resume into a PDF?&rdquo; A few google searches later and I stumbled on <a href="https://github.com/alanshaw/markdown-pdf">Alan Shaw&rsquo;s Markdown-PDF package</a>. This package converts markdown to HTML, renders it with PhantomJS, then exports the rendered site to a PDF. Simple, a bit crude, but it works. To aide in making the documents look good, the package includes the base CSS of Twitter Bootstrap.</p>
+
+<p>To make the generated resume look professional, I utilized some of the options Markdown-PDF provides. The first was using the &ldquo;Preprocess Markdown&rdquo; option to remove the YAML header and PDF download link from the file. Markdown-PDF doesn&rsquo;t understand the YAML header that Jekyll requires so I had to manually remove it, and there was no point to having a PDF download link in the PDF itself. Next, I processed the generated HTML to turn all links into plaintext. I found that they just made no sense if you couldn&rsquo;t click them, and they styling was distracting. Finally, I used the web font &ldquo;Oxygen&rdquo; to add some style.</p>
+
+<p>Finally, getting Travis-CI to generate the PDF is rather simple. Every Travis-CI VM includes Node.JS by default, so I just had to add <code>npm install markdown-pdf</code> and <code>node generate_resume.js</code> to the before script instructions. My resume is generated and put in the proper place, and then Octopress deploys it as normal. Simple!</p>
+
+<p><a href="https://github.com/Fugiman/fugiman.github.io/blob/d25eb2201d3f07e79a849f9ea6c6fedfcc6eef50/generate_resume.js">generate_resume.js</a><br/>
+<a href="https://github.com/Fugiman/fugiman.github.io/blob/d25eb2201d3f07e79a849f9ea6c6fedfcc6eef50/pdf.css">pdf.css</a><br/>
+<a href="https://github.com/Fugiman/fugiman.github.io/blob/d25eb2201d3f07e79a849f9ea6c6fedfcc6eef50/.travis.yml">.travis.yml</a></p>
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-12T19:55:00+00:00" pubdate data-updated="true">Sep 12<span>th</span>, 2013</time></div>
+	<div class="tags">
+
+</div>
+	
+</div>
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+		
+		
+		<a class="addthis_button_tweet"></a>
+		
+		
+		
+	</div>
+	
+</div>
+
+
+</div>
+	<footer id="footer" class="inner">Copyright &copy; 2013
+
+    Chris "Fugiman" Gamble
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-43089007-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+</body>
+</html>
