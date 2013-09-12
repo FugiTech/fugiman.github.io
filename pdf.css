@@ -1,0 +1,28 @@
+@font-face {
+	font-family: 'Oxygen';
+	font-weight: normal;
+	font-style: normal;
+	src: url(http://themes.googleusercontent.com/static/fonts/oxygen/v2/RzoNiRR1p2Mqyyz2RwqSMw.woff) format('woff');
+}
+@font-face {
+	font-family: 'OxygenBold';
+	font-weight: normal;
+	font-style: normal;
+	src: url(http://themes.googleusercontent.com/static/fonts/oxygen/v2/yVHpdQrmTj9Kax1tmFSx2j8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
+}
+
+html, body {
+	font-family: 'Oxygen', sans-serif;
+	font-size: 0.84em;
+	font-weight: normal;
+	font-style: normal;
+}
+h1, h2, ul, p {
+	margin: 6px 0;
+}
+h1, h2, b, strong {
+	font-family: 'OxygenBold', sans-serif; 
+	font-weight: bold;
+	font-style: normal;
+}
+

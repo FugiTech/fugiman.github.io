@@ -10,6 +10,8 @@ before_script:
 - git config --global user.email "travis@travis-ci.org"
 - export REPO_URL="https://$GH_TOKEN@github.com/$GH_REPO.git"
 - git clone --branch=master $REPO_URL _deploy
+- npm install markdown-pdf
+- nodejs generate_resume.js
 script:
 - rake generate
 after_script:

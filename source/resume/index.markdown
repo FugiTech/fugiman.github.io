@@ -10,6 +10,7 @@ sidebar: false
 Christopher Gamble
 ==================
 
+__Eagle Scout__  
 <chris@chrisgamble.net>  
 [ChrisGamble.net](http://chrisgamble.net)  
 Cary, NC 27519  
@@ -87,4 +88,6 @@ Links
 
 __Github:__ <http://github.com/Fugiman>  
 __LinkedIn:__ <http://www.linkedin.com/in/gamblecw>
+
+[__Download as PDF__](http://fugiman.com/resume/ChrisGamble.pdf)
 
