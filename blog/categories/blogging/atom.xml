@@ -4,7 +4,7 @@
   <title><![CDATA[Category: blogging | Fugiman]]></title>
   <link href="http://fugiman.github.io/blog/categories/blogging/atom.xml" rel="self"/>
   <link href="http://fugiman.github.io/"/>
-  <updated>2013-09-21T20:59:51+00:00</updated>
+  <updated>2013-09-21T21:04:14+00:00</updated>
   <id>http://fugiman.github.io/</id>
   <author>
     <name><![CDATA[Chris "Fugiman" Gamble]]></name>
@@ -12,6 +12,25 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Automatic Resume PDF Generation]]></title>
+    <link href="http://fugiman.github.io/blog/2013/09/12/automatic-resume-pdf-generation/"/>
+    <updated>2013-09-12T19:55:00+00:00</updated>
+    <id>http://fugiman.github.io/blog/2013/09/12/automatic-resume-pdf-generation</id>
+    <content type="html"><![CDATA[<p>Earlier I posted about using Prose.IO and Travis-CI to allow posting on my blog from anywhere with little hassle. However, I also host my resume on this site and wanted to be able to easily update it as well. While I could edit it like any other post from Prose, I also wanted a PDF copy for companies seeking a downloadable version and for uploading to other sites.</p>
+
+<p>The question became &ldquo;How do I automatically convert my markdown resume into a PDF?&rdquo; A few google searches later and I stumbled on <a href="https://github.com/alanshaw/markdown-pdf">Alan Shaw&rsquo;s Markdown-PDF package</a>. This package converts markdown to HTML, renders it with PhantomJS, then exports the rendered site to a PDF. Simple, a bit crude, but it works. To aide in making the documents look good, the package includes the base CSS of Twitter Bootstrap.</p>
+
+<p>To make the generated resume look professional, I utilized some of the options Markdown-PDF provides. The first was using the &ldquo;Preprocess Markdown&rdquo; option to remove the YAML header and PDF download link from the file. Markdown-PDF doesn&rsquo;t understand the YAML header that Jekyll requires so I had to manually remove it, and there was no point to having a PDF download link in the PDF itself. Next, I processed the generated HTML to turn all links into plaintext. I found that they just made no sense if you couldn&rsquo;t click them, and they styling was distracting. Finally, I used the web font &ldquo;Oxygen&rdquo; to add some style.</p>
+
+<p>Finally, getting Travis-CI to generate the PDF is rather simple. Every Travis-CI VM includes Node.JS by default, so I just had to add <code>npm install markdown-pdf</code> and <code>node generate_resume.js</code> to the before script instructions. My resume is generated and put in the proper place, and then Octopress deploys it as normal. Simple!</p>
+
+<p><a href="https://github.com/Fugiman/fugiman.github.io/blob/d25eb2201d3f07e79a849f9ea6c6fedfcc6eef50/generate_resume.js">generate_resume.js</a><br/>
+<a href="https://github.com/Fugiman/fugiman.github.io/blob/d25eb2201d3f07e79a849f9ea6c6fedfcc6eef50/pdf.css">pdf.css</a><br/>
+<a href="https://github.com/Fugiman/fugiman.github.io/blob/d25eb2201d3f07e79a849f9ea6c6fedfcc6eef50/.travis.yml">.travis.yml</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Using Prose.IO to post from the cloud]]></title>
