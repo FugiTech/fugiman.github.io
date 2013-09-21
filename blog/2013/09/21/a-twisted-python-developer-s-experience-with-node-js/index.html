@@ -1,0 +1,228 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>A Twisted-Python developer's experience with Node.JS - Fugiman</title>
+	<meta name="author" content="Chris "Fugiman" Gamble">
+
+	
+	<meta name="description" content="The Story Last weekend I was flown out to San Francisco to compete in the University Hacker Olympics hosted by SignalFire. Around 100 university &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Fugiman" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+</head>
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">Fugiman</a></h1>
+<nav id="main-nav"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+	<li><a href="/resume">Resume</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+	<li><a href="/resume">Resume</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:fugiman.github.io">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		<a class="twitter" href="http://twitter.com/Fugiman" title="Twitter">Twitter</a>
+		
+		
+		<a class="github" href="https://github.com/Fugiman" title="GitHub">GitHub</a>
+		
+    
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+    
+	</div>
+	<form class="search" action="http://google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:fugiman.github.io">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">A Twisted-Python Developer's Experience With Node.JS</h2>
+	<div class="entry-content"><h2>The Story</h2>
+
+<p>Last weekend I was flown out to San Francisco to compete in the <a href="http://events.signalfire.com/">University Hacker Olympics hosted by SignalFire</a>. Around 100 university students split in to teams of 2-5 students and worked with engineers from various companies on projects of their choosing. After 26 hours we presented our products to a panel of judges who would select the winning team. While there was a prize, I was just there to have a good time and meet some awesome people. Needless to say, I had a great time.</p>
+
+<h2>My Team</h2>
+
+<p>I got to work with some splendid folk from the <a href="http://samsungaccelerator.com/">Samsung Accelerator</a>. Our project idea was a website and android app to track ping pong matches between office employees and a leaderboard for each office. As <a href="http://samsungaccelerator.com/jason_yau/">Jason</a> had given a talk on Node.JS earlier, we decided to build the backend with Node as a learning exercise. It&rsquo;d be a simple REST api for the app, with data storage handled by MongoDB, and live updating of the website through Socket.IO. All very simple and straight-forward.</p>
+
+<h2>The Good</h2>
+
+<p>Node has an amazing community, and an easy to use package manager. We quickly got started using <a href="https://npmjs.org/package/express">Express</a> to make our REST api easy to build and our static content even easier. <a href="https://npmjs.org/package/mongoose">Mongoose</a> made our database persistance equally easy, and <a href="https://npmjs.org/package/socket.io">Socket.IO</a> was&hellip; well actually not great. Regardless, if we needed something done there was a package to help us get there.</p>
+
+<h2>The Bad</h2>
+
+<p>Node, like Twisted, is an event based asyncronous framework. To achieve this it uses callbacks like so:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">doSomething</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">if</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="c1">// Handle the error</span>
+</span><span class='line'>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>        <span class="c1">// Handle the result</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">})</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This works fine when one level deep, but what if your callback has to call another asyncronous function with a callback? What if <em>that</em> also has a callback? Your code starts flowing to the right faster than it flows down, and you enter callback hell.</p>
+
+<p>To prevent this, there are a number of libraries that tranform the callback syntax into a chainable sequence. Jason, our Node guru, recommended <a href="https://npmjs.org/package/q">Q</a>. Q introduces promises which, like Twisted&rsquo;s deferreds, allow easily chaining callbacks and error handlers. For example:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">doSomethingAndReturnAPromise</span><span class="p">()</span>
+</span><span class='line'><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="c1">// Do something with the result and return another promise</span>
+</span><span class='line'><span class="p">})</span>
+</span><span class='line'><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="c1">// Do something with the result of the last callback</span>
+</span><span class='line'><span class="p">})</span>
+</span><span class='line'><span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="c1">// Uh-oh, one of our three functions broke!</span>
+</span><span class='line'><span class="p">})</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>While they aren&rsquo;t exactly like deferreds, they serve a similar purpose and work rather well. Problem solved, right?</p>
+
+<h2>The Ugly</h2>
+
+<p>Not quite. While Q provides promises, no library returns them natively. Which means that every one of those lovely libraries provided by the caring community has to be wrapped in promises manually if you want to avoid callback hell. This negates a substantial portion of the benefit gained by having the libraries in the first place.</p>
+
+<h2>Conclusion</h2>
+
+<p>I&rsquo;m really glad I actually tried Node. I&rsquo;d been fairly set in my ways as a user of Twisted, and saw no need to switch. Now that I&rsquo;ve tried it, I realize that many of my arguments were just plain wrong. For instance, developing in javascript isn&rsquo;t as terrible as I thought it would be since the most frustrating bits are actually messing with the DOM, and there are good libraries to make it easier to write good javascript. While maturity of the event loop is also a concern, it&rsquo;s rather abstract and not something I&rsquo;m qualified to argue.</p>
+
+<p>What I can say for certain is that the lack of deferreds as a core component of node has led to a critical flow control problem. For now, I&rsquo;ll be sticking with Twisted and it&rsquo;s beautiful inlineCallbacks.</p>
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-21T16:57:00+00:00" pubdate data-updated="true">Sep 21<span>st</span>, 2013</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/node/'>node</a>, <a class='category' href='/blog/categories/programming/'>programming</a>, <a class='category' href='/blog/categories/twisted/'>twisted</a>
+
+
+</div>
+	
+</div>
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+		
+		
+		<a class="addthis_button_tweet"></a>
+		
+		
+		
+	</div>
+	
+</div>
+
+
+</div>
+	<footer id="footer" class="inner">Copyright &copy; 2013
+
+    Chris "Fugiman" Gamble
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-43089007-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+
+</body>
+</html>

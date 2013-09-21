@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: twisted | Fugiman]]></title>
+  <link href="http://fugiman.github.io/blog/categories/twisted/atom.xml" rel="self"/>
+  <link href="http://fugiman.github.io/"/>
+  <updated>2013-09-21T20:59:51+00:00</updated>
+  <id>http://fugiman.github.io/</id>
+  <author>
+    <name><![CDATA[Chris "Fugiman" Gamble]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[A Twisted-Python developer's experience with Node.JS]]></title>
+    <link href="http://fugiman.github.io/blog/2013/09/21/a-twisted-python-developer-s-experience-with-node-js/"/>
+    <updated>2013-09-21T16:57:00+00:00</updated>
+    <id>http://fugiman.github.io/blog/2013/09/21/a-twisted-python-developer-s-experience-with-node-js</id>
+    <content type="html"><![CDATA[<h2>The Story</h2>
+
+<p>Last weekend I was flown out to San Francisco to compete in the <a href="http://events.signalfire.com/">University Hacker Olympics hosted by SignalFire</a>. Around 100 university students split in to teams of 2-5 students and worked with engineers from various companies on projects of their choosing. After 26 hours we presented our products to a panel of judges who would select the winning team. While there was a prize, I was just there to have a good time and meet some awesome people. Needless to say, I had a great time.</p>
+
+<h2>My Team</h2>
+
+<p>I got to work with some splendid folk from the <a href="http://samsungaccelerator.com/">Samsung Accelerator</a>. Our project idea was a website and android app to track ping pong matches between office employees and a leaderboard for each office. As <a href="http://samsungaccelerator.com/jason_yau/">Jason</a> had given a talk on Node.JS earlier, we decided to build the backend with Node as a learning exercise. It&rsquo;d be a simple REST api for the app, with data storage handled by MongoDB, and live updating of the website through Socket.IO. All very simple and straight-forward.</p>
+
+<h2>The Good</h2>
+
+<p>Node has an amazing community, and an easy to use package manager. We quickly got started using <a href="https://npmjs.org/package/express">Express</a> to make our REST api easy to build and our static content even easier. <a href="https://npmjs.org/package/mongoose">Mongoose</a> made our database persistance equally easy, and <a href="https://npmjs.org/package/socket.io">Socket.IO</a> was&hellip; well actually not great. Regardless, if we needed something done there was a package to help us get there.</p>
+
+<h2>The Bad</h2>
+
+<p>Node, like Twisted, is an event based asyncronous framework. To achieve this it uses callbacks like so:</p>
+
+<p>```javascript
+doSomething(function(error, result) {</p>
+
+<pre><code>if(error) {
+    // Handle the error
+} else {
+    // Handle the result
+}
+</code></pre>
+
+<p>})
+```</p>
+
+<p>This works fine when one level deep, but what if your callback has to call another asyncronous function with a callback? What if <em>that</em> also has a callback? Your code starts flowing to the right faster than it flows down, and you enter callback hell.</p>
+
+<p>To prevent this, there are a number of libraries that tranform the callback syntax into a chainable sequence. Jason, our Node guru, recommended <a href="https://npmjs.org/package/q">Q</a>. Q introduces promises which, like Twisted&rsquo;s deferreds, allow easily chaining callbacks and error handlers. For example:</p>
+
+<p>```javascript
+doSomethingAndReturnAPromise()
+.then(function(result) {</p>
+
+<pre><code>// Do something with the result and return another promise
+</code></pre>
+
+<p>})
+.then(function(result) {</p>
+
+<pre><code>// Do something with the result of the last callback
+</code></pre>
+
+<p>})
+.catch(function(error) {</p>
+
+<pre><code>// Uh-oh, one of our three functions broke!
+</code></pre>
+
+<p>})
+```</p>
+
+<p>While they aren&rsquo;t exactly like deferreds, they serve a similar purpose and work rather well. Problem solved, right?</p>
+
+<h2>The Ugly</h2>
+
+<p>Not quite. While Q provides promises, no library returns them natively. Which means that every one of those lovely libraries provided by the caring community has to be wrapped in promises manually if you want to avoid callback hell. This negates a substantial portion of the benefit gained by having the libraries in the first place.</p>
+
+<h2>Conclusion</h2>
+
+<p>I&rsquo;m really glad I actually tried Node. I&rsquo;d been fairly set in my ways as a user of Twisted, and saw no need to switch. Now that I&rsquo;ve tried it, I realize that many of my arguments were just plain wrong. For instance, developing in javascript isn&rsquo;t as terrible as I thought it would be since the most frustrating bits are actually messing with the DOM, and there are good libraries to make it easier to write good javascript. While maturity of the event loop is also a concern, it&rsquo;s rather abstract and not something I&rsquo;m qualified to argue.</p>
+
+<p>What I can say for certain is that the lack of deferreds as a core component of node has led to a critical flow control problem. For now, I&rsquo;ll be sticking with Twisted and it&rsquo;s beautiful inlineCallbacks.</p>
+]]></content>
+  </entry>
+  
+</feed>
