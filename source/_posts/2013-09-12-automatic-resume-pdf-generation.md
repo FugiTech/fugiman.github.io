@@ -3,6 +3,7 @@ published: true
 layout: post
 title: Automatic Resume PDF Generation
 date: "2013-09-12 19:55"
+categories: blogging
 ---
 
 Earlier I posted about using Prose.IO and Travis-CI to allow posting on my blog from anywhere with little hassle. However, I also host my resume on this site and wanted to be able to easily update it as well. While I could edit it like any other post from Prose, I also wanted a PDF copy for companies seeking a downloadable version and for uploading to other sites.
